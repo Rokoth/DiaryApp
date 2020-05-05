@@ -1,0 +1,34 @@
+﻿@model FilteredList<AllEntry>;
+<table>
+    <thead>
+        <tr>
+            <th>
+                Тип записи
+            </th>
+            <th>
+                Дата начала
+            </th>
+            <th>
+                Заголовок
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model.Entries)
+        {
+            <tr>
+                <td>@entry.EntryTypeFull.Name</td>
+                <td>@entry.BeginDate.ToString("yyyy-MM-dd hh:mm:ss")</td>
+                <td>@entry.Title</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", entry.EntryTypeFull.Code, new { id = entry.Id }, null) |
+                    @Html.ActionLink("Details", "Index", entry.EntryTypeFull.Code, new { id = entry.Id }, null) |
+                    @Html.ActionLink("Delete", "Delete", entry.EntryTypeFull.Code, new { id = entry.Id }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>Показаны записи @Model.BeginNumber - @Model.EndNumber из @Model.AllCount </div>
+

@@ -1,0 +1,8 @@
+/Contracts/obj/Debug/netcoreapp3.1/*.cache
+/Contracts/obj
+/Contracts/bin
+/DB/obj
+/DB/bin
+/DiaryApp/obj
+/DiaryApp/bin
+/DiaryApp/Log

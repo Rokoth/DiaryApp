@@ -1,0 +1,35 @@
+﻿@model FilteredList<AllEntry>;
+@{
+    ViewData["Title"] = "Записная книжка";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <div id="createBlock">
+        <span id="addDeal" class="addButton"><a href="/Deal/Create">Новое дело</a></span>
+        <span id="addMeeting" class="addButton"><a href="/Meeting/Create">Новая встреча</a></span>
+        <span id="addMemo" class="addButton"><a href="/Memo/Create">Новая заметка</a></span>
+    </div>
+
+    <div id="tabs">
+        <span id="List" class="tabButton"><a href="#">Список</a></span>
+        <span id="Daily" class="tabButton"><a href="#">По дням</a></span>
+        <span id="Weekly" class="tabButton"><a href="#">По неделям</a></span>
+        <span id="Monthly" class="tabButton"><a href="#">По месяцам</a></span>
+    </div>
+    <div id="content"></div>
+    <div id="paging">
+        <span id="prevIndex">
+            <a href="#"><<= Пред.</a>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="nextIndex">
+            <a href="#">След. =>></a>
+        </span>
+    </div>
+</div>
+
+
+
+
+
