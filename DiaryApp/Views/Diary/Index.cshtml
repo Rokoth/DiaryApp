@@ -1,0 +1,71 @@
+﻿@model FilteredList<AllEntry>;
+@{
+    ViewData["Title"] = "Ежедневник";
+}
+
+<div>
+    <h1 class="display-4 text-center">@ViewData["Title"]</h1>
+
+    <div id="createBlock" class="btn-group btn-group-lg justify-content-lg-center col-lg-12">
+        <a href="/Deal/Create"><span id="addDeal" class="addButton btn btn-success">Новое дело</span></a>
+        <a href="/Meeting/Create"><span id="addMeeting" class="addButton btn btn-success">Новая встреча</span></a>
+        <a href="/Memo/Create"><span id="addMemo" class="addButton btn btn-success">Новая заметка</span></a>
+    </div>
+
+    <div id="tabsBlock" class="btn-group btn-group-lg col-lg-12">
+        <h6 class="text-center col-lg-2">Режим просмотра:</h6>
+        <span class="text-center col-lg-8">
+            <a href="#"><span id="List" class="tabButton btn btn-primary">Список</span></a>
+            <a href="#"><span id="Daily" class="tabButton btn btn-primary">По дням</span></a>
+            <a href="#"><span id="Weekly" class="tabButton btn btn-primary">По неделям</span></a>
+            <a href="#"><span id="Monthly" class="tabButton btn btn-primary">По месяцам</span></a>
+        </span>
+    </div>
+
+    <div id="filterBlock">
+        <label class="col-lg-2">Блок фильтров: </label>
+        <div>
+            <label for="SearchFilter" class="col-lg-2">Поиск: </label>
+            <input type="search" id="SearchFilter" class="filterItem col-lg-8" />
+        </div>
+        <div>
+            <label for="SearchFilter" class="col-lg-2">Дата с: </label>
+            <input type="datetime-local" id="BeginDateFilter" class="filterItem col-lg-4" />
+        </div>
+        <div>
+            <label for="SearchFilter" class="col-lg-2">Дата по: </label>
+            <input type="datetime-local" id="EndDateFilter" class="filterItem col-lg-4" />
+        </div>
+        <div id="typeChoiceFilter" class="col-lg-12">
+            <label class="col-lg-3">Тип записи: </label>
+            <input type="radio" id="typeChoiceFilter1" name="typeChoiceFilter" value="0" class="filterItem">
+            <label for="typeChoice1">All</label>
+            <input type="radio" id="typeChoiceFilter2" name="typeChoiceFilter" value="1" class="filterItem">
+            <label for="typeChoice2">Встреча</label>
+            <input type="radio" id="typeChoiceFilter3" name="typeChoiceFilter" value="2" class="filterItem">
+            <label for="typeChoice3">Дело</label>
+            <input type="radio" id="typeChoiceFilter4" name="typeChoiceFilter" value="3" class="filterItem">
+            <label for="typeChoice4">Запись</label>
+        </div>
+        <div><span id="filterButton" class="btn btn-primary">Применить фильтр</span></div>
+    </div>
+
+    <div id="content"></div>
+    <div id="paging" class="btn-group btn-group-md justify-content-md-center col-md-12">
+        <span id="prevIndex" class="btn btn-info col-2" enabled="True">
+            Предыдущий
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="nextIndex" class="btn btn-info col-2" enabled="True">
+            Следующий
+        </span>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/diary.js" asp-append-version="true"></script>
+
+}
+
+
+
+

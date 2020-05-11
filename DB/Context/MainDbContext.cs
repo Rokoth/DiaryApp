@@ -28,17 +28,40 @@ namespace DB.Context
             modelBuilder.Entity<Entry>().HasKey(s => s.Id);
             modelBuilder.Entity<Entry>().ToTable("Diary");
             modelBuilder.Entity<Entry>().Property(s => s.EntryType).HasColumnType("smallint");
+            modelBuilder.Entity<Entry>().HasQueryFilter(s => !s.IsDeleted);
             modelBuilder.Entity<Entry>()
                 .HasDiscriminator(s => s.EntryType)
                 .HasValue<Entry>(Contracts.EntryType.All)
                 .HasValue<DealEntry>(Contracts.EntryType.Deal)
                 .HasValue<MemoEntry>(Contracts.EntryType.Memo)
-                .HasValue<MeetingEntry>(Contracts.EntryType.Meeting)
-                ;
+                .HasValue<MeetingEntry>(Contracts.EntryType.Meeting);
 
             modelBuilder.ApplyConfiguration(new DealConfiguration());
             modelBuilder.ApplyConfiguration(new MeetingConfiguration());
             modelBuilder.ApplyConfiguration(new MemoConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactInfoConfiguration());
+        }
+    }
+
+    public class ContactConfiguration : IEntityTypeConfiguration<Contact>
+    {
+        public void Configure(EntityTypeBuilder<Contact> builder)
+        {
+            builder.HasKey(s => s.Id);
+            builder.ToTable("Contact");
+            builder.HasQueryFilter(s => !s.IsDeleted);
+            builder.HasMany(s => s.ContactInfos).WithOne().HasForeignKey(s => s.ContactId);
+        }
+    }
+
+    public class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
+    {
+        public void Configure(EntityTypeBuilder<ContactInfo> builder)
+        {
+            builder.HasKey(s => s.Id);
+            builder.ToTable("ContactInfo");
+            builder.Property(s => s.ContactInfoType).HasColumnType("smallint");
         }
     }
 

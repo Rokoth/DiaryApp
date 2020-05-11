@@ -12,6 +12,7 @@ namespace DiaryApp.Services
             CreateMap<DB.Context.MeetingEntry, Models.MeetingEntry>();
             CreateMap<DB.Context.MemoEntry, Models.MemoEntry>();
             CreateMap<DB.Repository.FilteredList<DB.Context.Entry>, Models.FilteredList<AllEntry>>();
+            CreateMap<DB.Repository.FilteredList<DB.Context.Contact>, Models.FilteredList<Contact>>();
 
 
             CreateMap<Models.DealEntry, DB.Context.DealEntry>();
@@ -25,6 +26,12 @@ namespace DiaryApp.Services
                     };
                 });
             CreateMap<Models.MemoEntry, DB.Context.MemoEntry>();
+
+            CreateMap<DB.Context.Contact, Contact>();
+            CreateMap<Contact, DB.Context.Contact>();
+
+            CreateMap<DB.Context.ContactInfo, ContactInfo>();
+            CreateMap<ContactInfo, DB.Context.ContactInfo>();
         }
     }
 }

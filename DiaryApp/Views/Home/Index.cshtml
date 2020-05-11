@@ -5,28 +5,76 @@
 
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
-    <div id="createBlock">
-        <span id="addDeal" class="addButton"><a href="/Deal/Create">Новое дело</a></span>
-        <span id="addMeeting" class="addButton"><a href="/Meeting/Create">Новая встреча</a></span>
-        <span id="addMemo" class="addButton"><a href="/Memo/Create">Новая заметка</a></span>
-    </div>
+</div>
+<div class="align-content-lg-start">
+    <h2>Общее описание задания</h2>
+    Приложение должно состоять из следующих подсистем:
 
-    <div id="tabs">
-        <span id="List" class="tabButton"><a href="#">Список</a></span>
-        <span id="Daily" class="tabButton"><a href="#">По дням</a></span>
-        <span id="Weekly" class="tabButton"><a href="#">По неделям</a></span>
-        <span id="Monthly" class="tabButton"><a href="#">По месяцам</a></span>
-    </div>
-    <div id="content"></div>
-    <div id="paging">
-        <span id="prevIndex">
-            <a href="#"><<= Пред.</a>
-        </span>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span id="nextIndex">
-            <a href="#">След. =>></a>
-        </span>
-    </div>
+    <h3>Ежедневник: @Html.ActionLink("открыть приложение", "Index", "Diary", null, null)</h3>
+    <ul>
+        <li>Отображение записей в режимах «День», «Неделя», «Месяц», «Список».</li>
+        <li>
+            Возможность поиска, фильтрации по типу записей, датам.
+        </li>
+        <li>
+            Возможность добавлять, удалять, редактировать записи, помечать выполненными.
+        </li>
+        <li>
+            Типы записей:
+            <ul>
+                <li>
+                    Встреча;
+                </li>
+                <li>
+                    Дело;
+                </li>
+                <li>
+                    Памятка;
+                </li>
+            </ul>
+        </li>
+        <li>
+            Список полей:
+            <ul>
+                <li>
+                    Тип записи;
+                </li>
+                <li>
+                    Тема;
+                </li>
+                <li>
+                    Дата и время начала;
+                </li>
+                <li>
+                    Дата и время окончания (кроме типа «Памятка»);
+                </li>
+                <li>Место (только для типа «Встреча»).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Список контактов: @Html.ActionLink("открыть приложение", "Index", "Contact", null, null)</h3>
+    <ul>
+        <li>Возможность добавлять, удалять, редактировать записи.</li>
+        <li>Возможность поиска контакта по любому полю.</li>
+        <li>
+            Список полей:
+            <ul>
+                <li>Фамилия;</li>
+                <li>Имя;</li>
+                <li>Отчество;</li>
+                <li>Дата рождения;</li>
+                <li>Организация;</li>
+                <li>Должность;</li>
+                <li>Контактная информация:</li>
+                <li>Телефон;</li>
+                <li>Email;</li>
+                <li>Skype;</li>
+                <li>Другое;</li>
+            </ul>
+        </li>
+        <li>Поля контактной информации могут быть использованы несколько раз для одного контакта (один контакт может иметь несколько телефонных номеров)</li>
+    </ul>
 </div>
 
 

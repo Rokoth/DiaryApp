@@ -17,4 +17,12 @@ namespace Contracts
         Deal = 2,
         Memo = 3
     }
+
+    public enum ContactInfoType
+    {
+        Other = 0,
+        Phone = 1,
+        Email = 2,
+        Skype = 3
+    }
 }

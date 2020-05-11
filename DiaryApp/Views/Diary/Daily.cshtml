@@ -1,0 +1,33 @@
+﻿@model GroupedList<AllEntry>;
+<div><h4>Дата: @Model.Key</h4></div>
+<table class="table">
+    <thead><tr><th></th><th>Тип записи</th><th>Дата начала</th><th>Описание</th></tr></thead>
+    <tbody>
+        @foreach (var group in Model.Entries)
+        {
+            <tr>
+                <th>Время: @group.Key</th>
+                <th>Записей: </th>
+                <th>@group.Value.Count()</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var entry in group.Value)
+            {
+                <tr>
+                    <td></td>
+                    <td>@entry.EntryTypeFull.Name</td>
+                    <td>@entry.BeginDate.ToString("yyyy-MM-dd hh:mm:ss")</td>
+                    <td>@entry.Title</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", entry.EntryTypeFull.Code, new { id = entry.Id }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Details", "Index", entry.EntryTypeFull.Code, new { id = entry.Id }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Delete", "Delete", entry.EntryTypeFull.Code, new { id = entry.Id }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>

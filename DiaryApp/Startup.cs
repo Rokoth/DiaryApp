@@ -25,16 +25,20 @@ namespace DiaryApp
         {
             services.AddControllersWithViews();
             services
-                .AddScoped<IRepositoryAll, RepositoryAll>()
-                .AddScoped<IRepository<DealEntry>, Repository<DealEntry>>()
-                .AddScoped<IRepository<MemoEntry>, Repository<MemoEntry>>()
-                .AddScoped<IRepository<MeetingEntry>, Repository<MeetingEntry>>()
+                .AddScoped<IRepositoryAll<DB.Context.Entry>, RepositoryAll>()
+                .AddScoped<IRepository<DB.Context.DealEntry>, RepositoryEntry<DB.Context.DealEntry>>()
+                .AddScoped<IRepository<DB.Context.MemoEntry>, RepositoryEntry<DB.Context.MemoEntry>>()
+                .AddScoped<IRepository<DB.Context.MeetingEntry>, RepositoryEntry<DB.Context.MeetingEntry>>()
+                .AddScoped<IRepository<DB.Context.Contact>, Repository<DB.Context.Contact>>()
+                .AddScoped<IRepository<DB.Context.ContactInfo>, Repository<DB.Context.ContactInfo>>()
+                .AddScoped<IRepository<DB.Context.MeetingPlace>, Repository<DB.Context.MeetingPlace>>()
 
                 //.AddScoped<IDataService, TestDataService>()
                 .AddScoped<IDataService, DataService>()
-                .AddScoped<IDataService<Models.DealEntry>, DataService<Models.DealEntry, DealEntry>>()
-                .AddScoped<IDataService<Models.MemoEntry>, DataService<Models.MemoEntry, MemoEntry>>()
-                .AddScoped<IDataService<Models.MeetingEntry>, DataService<Models.MeetingEntry, MeetingEntry>>()
+                .AddScoped<IDataService<Models.DealEntry>, DataService<Models.DealEntry, DB.Context.DealEntry>>()
+                .AddScoped<IDataService<Models.MemoEntry>, DataService<Models.MemoEntry, DB.Context.MemoEntry>>()
+                .AddScoped<IDataService<Models.MeetingEntry>, MeetingDataService>()
+                .AddScoped<IContactDataService, ContactDataService>()
                 .AddAutoMapper(typeof(MappingProfile));
             services.AddDbContext<MainDbContext>((opt) =>
             {

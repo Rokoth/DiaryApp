@@ -68,11 +68,40 @@ CREATE TABLE [dbo].[Diary] (
 );
 
 GO
-CREATE TABLE [dbo].[Meeting]
+CREATE TABLE [dbo].[MeetingPlace] (
+    [Id]    UNIQUEIDENTIFIER NOT NULL,
+    [Place] NVARCHAR (200)   NULL,
+    [VersionDate] DATETIMEOFFSET NOT NULL, 
+    [IsDeleted] BIT NOT NULL, 
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+GO
+CREATE TABLE [dbo].[Contact]
 (
-    [Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [Place] NVARCHAR(200) NULL
-)
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [VersionDate] DATETIMEOFFSET NOT NULL, 
+    [IsDeleted] BIT NOT NULL, 
+    [FirstName] VARCHAR(50) NULL, 
+    [SecondName] VARCHAR(50) NULL, 
+    [ThirdName] VARCHAR(50) NULL, 
+    [BirthDate] DATETIMEOFFSET NULL, 
+    [Company] VARCHAR(200) NULL, 
+    [Position] VARCHAR(50) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+GO
+CREATE TABLE [dbo].[ContactInfo]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [VersionDate] DATETIMEOFFSET NOT NULL, 
+    [IsDeleted] BIT NOT NULL, 
+    [ContactId] UNIQUEIDENTIFIER NOT NULL, 
+    [ContactInfoType] SMALLINT NOT NULL, 
+    [Value] VARCHAR(200) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC) 
+);
 
 GO
 IF @@ERROR <> 0

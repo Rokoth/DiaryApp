@@ -31,6 +31,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-controller="Home" asp-action="Index">Back to List</a>
+    @Html.ActionLink("Редактировать", "Edit", Model.EntryTypeFull.Code, new { id = Model.Id }, new { @class = "btn btn-primary" })
+    <a asp-controller="Diary" asp-action="Index" class="btn btn-primary">Вернуться</a>
 </div>

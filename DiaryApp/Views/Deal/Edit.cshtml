@@ -4,7 +4,7 @@
 
 }
 
-<h4>DealEntry</h4>
+<h4>Редактирование дела</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,8 +16,8 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label type="datetime-local" asp-for="BeginDate" class="control-label"></label>
-                <input asp-for="BeginDate" class="form-control" />
+                <label asp-for="BeginDate" class="control-label"></label>
+                <input type="datetime-local" asp-for="BeginDate" class="form-control" />
                 <span asp-validation-for="BeginDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,5 +38,5 @@
 </div>
 
 <div>
-    <a asp-controller="Home" asp-action="Index">Back to List</a>
+    <a asp-controller="Diary" asp-action="Index" class="btn btn-primary">Вернуться</a>
 </div>
