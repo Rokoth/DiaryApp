@@ -27,11 +27,20 @@ function getList(page, currTab, filter) {
             contentType: 'text/plain; charset=utf-8',
             success: function (data, textStatus, request) {
                 $('#content').html(data);
-                if (request.getResponseHeader('IsFirstPage') !== undefined) {
-                    $('#prevIndex').attr('enabled', !request.getResponseHeader('IsFirstPage'));
+                if (request.getResponseHeader('X-Header-IsFirstPage') !== undefined) {
+                    $('#prevIndex').attr('enabled', !request.getResponseHeader('X-Header-IsFirstPage'));
                 }
-                if (request.getResponseHeader('IsLastPage') !== undefined) {
-                    $('#nextIndex').attr('enabled', !request.getResponseHeader('IsLastPage'));
+                if (request.getResponseHeader('X-Header-IsLastPage') !== undefined) {
+                    $('#nextIndex').attr('enabled', !request.getResponseHeader('X-Header-IsLastPage'));
+                }
+                if (request.getResponseHeader('X-Header-AllCount') !== undefined) {
+                    $('#allCount').html(request.getResponseHeader('X-Header-AllCount'));
+                }                
+                if (request.getResponseHeader('X-Header-BeginNumber') !== undefined) {
+                    $('#beginNumber').html(request.getResponseHeader('X-Header-BeginNumber'));
+                }
+                if (request.getResponseHeader('X-Header-EndNumber') !== undefined) {
+                    $('#lastNumber').html(request.getResponseHeader('X-Header-EndNumber'));
                 }
             },
             error: function () {

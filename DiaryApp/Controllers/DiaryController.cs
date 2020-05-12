@@ -43,9 +43,8 @@ namespace DiaryApp.Controllers
                     descSort = true;
                 }
                 var entries = await dataService.GetList(size, page, sort, descSort, search, beginDate, endDate, entryType);
-                HttpContext.Response.Headers.Add("IsFirstPage", entries.IsFirstPage.ToString());
-                HttpContext.Response.Headers.Add("IsLastPage", entries.IsLastPage.ToString());
-                return PartialView(entries);
+                SetHeaders(entries.AllCount, entries.BeginNumber, entries.EndNumber, entries.IsFirstPage, entries.IsLastPage);
+                return PartialView(entries.Entries);
             }
             catch (Exception ex)
             {
@@ -54,13 +53,13 @@ namespace DiaryApp.Controllers
             }
         }
 
+
         public async Task<IActionResult> Daily(int offset = 0)
         {
             try
             {
                 var entries = await dataService.GetDaily(offset);
-                HttpContext.Response.Headers.Add("IsFirstPage", "False");
-                HttpContext.Response.Headers.Add("IsLastPage", "False");
+                SetHeaders(entries.Entries.Count, 1, entries.Entries.Count, false, false);
                 return PartialView(entries);
             }
             catch (Exception ex)
@@ -76,8 +75,7 @@ namespace DiaryApp.Controllers
             try
             {
                 var entries = await dataService.GetMonthly(offset);
-                HttpContext.Response.Headers.Add("IsFirstPage", "False");
-                HttpContext.Response.Headers.Add("IsLastPage", "False");
+                SetHeaders(entries.Entries.Count, 1, entries.Entries.Count, false, false);
                 return PartialView(entries);
             }
             catch (Exception ex)
@@ -92,8 +90,7 @@ namespace DiaryApp.Controllers
             try
             {
                 var entries = await dataService.GetWeekly(offset);
-                HttpContext.Response.Headers.Add("IsFirstPage", "False");
-                HttpContext.Response.Headers.Add("IsLastPage", "False");
+                SetHeaders(entries.Entries.Count, 1, entries.Entries.Count, false, false);
                 return PartialView(entries);
             }
             catch (Exception ex)
@@ -112,6 +109,15 @@ namespace DiaryApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private void SetHeaders(int allCount, int beginNumber, int endNumber, bool isFirstPage, bool isLastPage)
+        {
+            HttpContext.Response.Headers.Add("X-Header-AllCount", allCount.ToString());
+            HttpContext.Response.Headers.Add("X-Header-BeginNumber", beginNumber.ToString());
+            HttpContext.Response.Headers.Add("X-Header-EndNumber", endNumber.ToString());
+            HttpContext.Response.Headers.Add("X-Header-IsFirstPage", isFirstPage.ToString());
+            HttpContext.Response.Headers.Add("X-Header-IsLastPage", isLastPage.ToString());
         }
     }
 }
