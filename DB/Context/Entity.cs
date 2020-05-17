@@ -36,14 +36,13 @@ namespace DB.Context
         public string Description { get; set; }
         public string Title { get; set; }
         public DateTimeOffset BeginDate { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
     }
 
     public class MeetingEntry : Entry
     {
         public override EntryType EntryType => EntryType.Meeting;
-        public DateTimeOffset EndDate { get; set; }
         public string Place => MeetingPlace.Place;
-
         public MeetingPlace MeetingPlace { get; set; }
     }
 
@@ -55,7 +54,6 @@ namespace DB.Context
     public class DealEntry : Entry
     {
         public override EntryType EntryType => EntryType.Deal;
-        public DateTimeOffset EndDate { get; set; }
     }
 
     public class MemoEntry : Entry

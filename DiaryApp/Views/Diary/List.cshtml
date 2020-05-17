@@ -8,13 +8,16 @@
     <thead>
         <tr>
             <th>
-                Тип записи
+                @Html.DisplayNameFor(model => model.EntryType)
             </th>
             <th>
-                Дата начала
+                @Html.DisplayNameFor(model => model.BeginDate)
             </th>
             <th>
-                Заголовок
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th></th>
         </tr>
@@ -25,6 +28,7 @@
             <tr>
                 <td>@entry.EntryTypeFull.Name</td>
                 <td>@entry.BeginDate.ToString("yyyy-MM-dd hh:mm:ss")</td>
+                <td>@(entry.EndDate.HasValue ? entry.EndDate.Value.ToString("yyyy-MM-dd hh:mm:ss"):"")</td>
                 <td>@entry.Title</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", entry.EntryTypeFull.Code, new { id = entry.Id }, new { @class = "btn btn-primary" }) |

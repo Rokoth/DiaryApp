@@ -89,3 +89,11 @@ body {
 #filterBlock {
     display:block;
 }
+
+.hiddenRowsBody {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}

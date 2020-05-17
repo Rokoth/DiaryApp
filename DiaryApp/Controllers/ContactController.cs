@@ -17,7 +17,13 @@ namespace DiaryApp.Controllers
             _logger = logger;
             this.dataService = dataService;
         }
-        public async Task<IActionResult> Index(
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> List(
             [FromQuery]int size = 10,
             [FromQuery]int page = 0,
             [FromQuery]string sort = null,
@@ -28,8 +34,14 @@ namespace DiaryApp.Controllers
         {
             try
             {
+                if (string.IsNullOrEmpty(sort))
+                {
+                    sort = "ThirdName";
+                    descSort = true;
+                }
                 var entries = await dataService.GetList(size, page, sort, descSort, search, beginDate, endDate);
-                return View(entries);
+                SetHeaders(entries.AllCount, entries.BeginNumber, entries.EndNumber, entries.IsFirstPage, entries.IsLastPage);
+                return PartialView(entries.Entries);
             }
             catch (Exception ex)
             {
@@ -150,6 +162,15 @@ namespace DiaryApp.Controllers
             {
                 return View();
             }
+        }
+
+        private void SetHeaders(int allCount, int beginNumber, int endNumber, bool isFirstPage, bool isLastPage)
+        {
+            HttpContext.Response.Headers.Add("X-Header-AllCount", allCount.ToString());
+            HttpContext.Response.Headers.Add("X-Header-BeginNumber", beginNumber.ToString());
+            HttpContext.Response.Headers.Add("X-Header-EndNumber", endNumber.ToString());
+            HttpContext.Response.Headers.Add("X-Header-IsFirstPage", isFirstPage.ToString());
+            HttpContext.Response.Headers.Add("X-Header-IsLastPage", isLastPage.ToString());
         }
     }
 }

@@ -3,23 +3,10 @@
 
 // Write your JavaScript code.
 
-function getList(page, currTab, filter) {
-    let url = null;
-    //alert("currTab:" + currTab);
+function getList(page, filter) {
+    let url = "/Contact/List?size=10&page=" + page + filter;    
     $('#content').html('Loading...');
-    switch (currTab) {
-        case "List":
-            url = "/Diary/List?size=10&page=" + page + filter; break;
-        case "Daily":
-            url = "/Diary/Daily?offset=" + page; break;
-        case "Weekly":
-            url = "/Diary/Weekly?offset=" + page; break;
-        case "Monthly":
-            url = "/Diary/Monthly?offset=" + page; break;
-        default:
-            url = "/Diary/List?size=10&page=" + page; break;           
-    }
-    //alert("url:" + url);
+      
     if (url !== null) {
         $.ajax({
             type: "GET",
@@ -51,56 +38,31 @@ function getList(page, currTab, filter) {
 }
 
 $(document).ready(function () {
-    let currPage = 0;
-    let currTab = 'List';
+    let currPage = 0;   
     let filter = '';
 
-    getList(currPage, currTab, filter);
-
-    //$('.filterItem').change(function () {
-    //    filter =
-    //        '&search=' + $('#SearchFilter').val() +
-    //        '&beginDate=' + $('#BeginDateFilter').val() +
-    //        '&endDate=' + $('#EndDateFilter').val() +
-    //        '&entryType=' + $("input[name='typeChoiceFilter']:checked").val();
-    //    getList(currPage, currTab, filter);
-    //});
-
+    getList(currPage, filter);
+    
     $('#filterButton').click(function () {
         filter =
             '&search=' + $('#SearchFilter').val() +
             '&beginDate=' + $('#BeginDateFilter').val() +
             '&endDate=' + $('#EndDateFilter').val() +
             '&entryType=' + $("input[name='typeChoiceFilter']:checked").val();
-        getList(currPage, currTab, filter);
-    });
-
-    $('.tabButton').click(function () {
-        if (currTab !== this.getAttribute("id")) {
-            //alert(this.getAttribute("id"));
-            currTab = this.getAttribute("id");   
-            if (currTab === 'List') {
-                $('#filterBlock').css('display', 'block');
-            }
-            else {
-                $('#filterBlock').css('display', 'none');
-            }                    
-            currPage = 0;
-            getList(currPage, currTab, filter);
-        }
+        getList(currPage, filter);
     });
 
     $('#prevIndex').click(function () {
         if ($('#prevIndex').attr('enabled')==='true') {
             currPage--;
-            getList(currPage, currTab, filter);
+            getList(currPage, filter);
         }
     });
 
     $('#nextIndex').click(function () {
         if ($('#nextIndex').attr('enabled') === 'true') {
             currPage++;
-            getList(currPage, currTab, filter);
+            getList(currPage, filter);
         }
     });   
 });

@@ -1,7 +1,7 @@
 ﻿@model GroupedList<AllEntry>;
 <div><h4>Дата: @Model.Key</h4></div>
 <table class="table">
-    <thead><tr><th></th><th>Тип записи</th><th>Дата начала</th><th>Описание</th></tr></thead>
+    <thead><tr><th></th><th>Тип записи</th><th>Дата начала</th><th>Дата окончания</th><th>Описание</th><th></th></tr></thead>
     <tbody>
         @foreach (var group in Model.Entries)
         {
@@ -11,14 +11,15 @@
                 <th>@group.Value.Count()</th>
                 <th></th>
                 <th></th>
-                <th></th>
+                <th><span class="hiddenRowsHead btn btn-secondary" name="@group.Key.GetHashCode()">Показать</span></th>
             </tr>
             @foreach (var entry in group.Value)
             {
-                <tr>
+                <tr class="hiddenRowsBody" id="@group.Key.GetHashCode()">
                     <td></td>
                     <td>@entry.EntryTypeFull.Name</td>
                     <td>@entry.BeginDate.ToString("yyyy-MM-dd hh:mm:ss")</td>
+                    <td>@(entry.EndDate.HasValue ? entry.EndDate.Value.ToString("yyyy-MM-dd hh:mm:ss"):"")</td>
                     <td>@entry.Title</td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", entry.EntryTypeFull.Code, new { id = entry.Id }, new { @class = "btn btn-primary" }) |
@@ -31,3 +32,18 @@
         }
     </tbody>
 </table>
+
+<script>
+    $('.hiddenRowsHead').click(function () {
+        var id = '#' + $(this).attr('name');
+        if ($(id).css('display') === 'none') {
+            $(id).css('display', 'table-row');
+            $(this).html('Скрыть');
+        }
+        else {
+            $(id).css('display', 'none');
+            $(this).html('Показать');
+        }
+    }
+    );
+</script>

@@ -1,0 +1,43 @@
+﻿@model DiaryApp.Models.ContactInfo
+
+@{
+    ViewData["Title"] = "Добавить контактную информацию";
+
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Заполните все поля</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group hidden">
+                <label asp-for="ContactId" class="control-label"></label>
+                <input asp-for="ContactId" class="form-control" />
+                <span asp-validation-for="ContactId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactInfoType" class="control-label"></label>
+                @Html.DropDownList("ContactInfoType",
+                    new SelectList(ContactInfoTypeReferences.AllReferences, "EntryType", "Name"),
+                    "Выберите тип контактной информации")
+                <span asp-validation-for="ContactInfoType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Вернуться", "Details", "Contact", new { id = Model.ContactId }, new { @class = "btn btn-primary" })
+</div>
+

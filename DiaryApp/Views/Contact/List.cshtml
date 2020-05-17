@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DiaryApp.Models.Contact>
+
+<table class="table col-12">
+    <thead>
+        <tr>
+            <th>
+                ФИО
+            </th>
+            <th>
+                Компания / Должность
+            </th>
+            <th>Контактная информация</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ThirdName @item.FirstName @item.SecondName
+                </td>
+                <td>
+                    @item.Company @item.Position
+                </td>
+                <td>
+                    @foreach (var info in item.ContactInfos)
+                    {
+                        @(info.ContactInfoTypeFull.Name + " " + info.Value) <br>
+                    }
+
+                </td>
+                <td>
+                    @Html.ActionLink("Подробнее", "Details", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

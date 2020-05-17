@@ -1,0 +1,32 @@
+﻿@model DiaryApp.Models.ContactInfo
+
+@{
+    ViewData["Title"] = "Удаление контактной информации";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <h4>ContactInfo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContactInfoType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContactInfoTypeFull.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        @Html.ActionLink("Вернуться", "Details", "Contact", new { id = Model.ContactId }, new { @class = "btn btn-primary" })
+    </form>
+</div>

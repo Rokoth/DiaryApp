@@ -1,60 +1,87 @@
 ﻿@model DiaryApp.Models.Contact
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детали контакта";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div>
-    <h4>Contact</h4>
+    <h4>Подробная информация</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-12 col-md-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-12 col-md-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-12 col-md-2">
             @Html.DisplayNameFor(model => model.SecondName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-12 col-md-10">
             @Html.DisplayFor(model => model.SecondName)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-12 col-md-2">
             @Html.DisplayNameFor(model => model.ThirdName)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-12 col-md-10">
             @Html.DisplayFor(model => model.ThirdName)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-12 col-md-2">
             @Html.DisplayNameFor(model => model.BirthDate)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BirthDate)
+        <dd class="col-12 col-md-10">
+            @Html.DisplayFor(model => model.BirthDateView)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-12 col-md-2">
             @Html.DisplayNameFor(model => model.Company)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-12 col-md-10">
             @Html.DisplayFor(model => model.Company)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-12 col-md-2">
             @Html.DisplayNameFor(model => model.Position)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-12 col-md-10">
             @Html.DisplayFor(model => model.Position)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+        <dt class="col-12">
+            @Html.DisplayNameFor(model => model.ContactInfoSummary)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+        <dd class="col-12">
+            <p>
+                @Html.ActionLink("Добавить", "Create", "ContactInfo", new { contactId = Model.Id }, new { @class = "btn btn-primary" })
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Тип контакта</th>
+                        <th>Значение</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var info in Model.ContactInfos)
+                    {
+                        <tr>
+                            <td>@info.ContactInfoTypeFull.Name</td>
+                            <td>@info.Value</td>
+                            <td>
+                                @Html.ActionLink("Редактировать", "Edit", "ContactInfo", new { id = info.Id }, new { @class = "btn btn-primary" }) |
+                                @Html.ActionLink("Просмотр", "Details", "ContactInfo", new { id = info.Id }, new { @class = "btn btn-primary" }) |
+                                @Html.ActionLink("Удалить", "Delete", "ContactInfo", new { id = info.Id }, new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
         </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+    <a asp-action="Index" class="btn btn-primary">Вернуться к списку</a>
 </div>

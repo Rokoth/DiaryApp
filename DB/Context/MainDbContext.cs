@@ -10,6 +10,8 @@ namespace DB.Context
         public DbSet<DealEntry> Deals { get; set; }
         public DbSet<MemoEntry> Memos { get; set; }
         public DbSet<Entry> Entries { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<ContactInfo> ContactInfos { get; set; }
 
         public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
         {
@@ -61,6 +63,7 @@ namespace DB.Context
         {
             builder.HasKey(s => s.Id);
             builder.ToTable("ContactInfo");
+            builder.HasQueryFilter(s => !s.IsDeleted);
             builder.Property(s => s.ContactInfoType).HasColumnType("smallint");
         }
     }

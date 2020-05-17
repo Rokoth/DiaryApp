@@ -1,66 +1,37 @@
 ﻿@model FilteredList<DiaryApp.Models.Contact>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Список контактов";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Добавить новый</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Имя
-            </th>
-            <th>
-                Отчество
-            </th>
-            <th>
-                Фамилия
-            </th>
-            <th>
-                Дата рождения
-            </th>
-            <th>
-                Компания
-            </th>
-            <th>
-                Должность
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Entries)
-        {
-            <tr>
-                <td>
-                    item.FirstName
-                </td>
-                <td>
-                    item.SecondName
-                </td>
-                <td>
-                    item.ThirdName
-                </td>
-                <td>
-                    item.BirthDate
-                </td>
-                <td>
-                    item.Company
-                </td>
-                <td>
-                    item.Position
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<div id="filterBlock">
+    <label class="col-lg-2">Блок фильтров: </label>
+    <div>
+        <label for="SearchFilter" class="col-lg-2">Поиск: </label>
+        <input type="search" id="SearchFilter" class="filterItem col-lg-8" />
+    </div>
+    <div><span id="filterButton" class="btn btn-primary">Применить фильтр</span></div>
+</div>
+
+<div id="content"></div>
+<div class="text-center">Показаны записи <span id="beginNumber"></span> - <span id="lastNumber"></span> из <span id="allCount"></span></div>
+<div id="paging" class="btn-group btn-group-md justify-content-md-center col-md-12">
+    <span id="prevIndex" class="btn btn-info col-2" enabled="True">
+        Предыдущий
+    </span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span id="nextIndex" class="btn btn-info col-2" enabled="True">
+        Следующий
+    </span>
+</div>
+@section Scripts {
+    <script src="~/js/contact.js" asp-append-version="true"></script>
+
+}
+
